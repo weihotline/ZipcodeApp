@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TestRunner</title>
+  <link rel="stylesheet" href="./node_modules/mocha/mocha.css">
+</head>
+<body>
+  <div id="container">
+    <div id="area">
+      <h2>Loading...</h2>
+    </div> <!-- area -->
+  </div><!-- container -->
+
+  <script src="assets/js/jquery-2.1.3.min.js"></script>
+  <script src="assets/js/underscore.js"></script>
+  <script src="assets/js/backbone.js"></script>
+
+  <!-- simple Backbone View template -->
+  <script type="text/template" id="area-template">
+    <fieldset>
+      <label for="zipcode">ZIP Code&#x2122: </label>
+      <input type="text" id="zipcode" placeholder="(e.g., 94100)">
+    </fieldset>
+
+    <p>State: <%= info === null ?  "" : info.get("state") %></p>
+    <p>City: <%= info === null ? "" : info.get("city") %></p>
+  </script>
+  <script src="assets/js/zipcode.js"></script>
+
+
+
+  <!-- JS files for testing -->
+  <script src="./node_modules/mocha/mocha.js"></script>
+  <script src="./node_modules/chai/chai.js"></script>
+  <script>
+    mocha.ui('bdd');
+    mocha.reporter('html');
+    var expect = chai.expect;
+  </script>
+
+  <script src="./test/00_layout_spec.js"></script>
+  <script>
+    if (window.mochaPhantomJS) {
+      mochaPhantomJS.run();
+    } else {
+      mocha.run();
+    }
+  </script>
+</body>
+</html>
