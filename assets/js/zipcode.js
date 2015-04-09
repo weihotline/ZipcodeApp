@@ -1,11 +1,12 @@
 $(function() {
+  window.ZipcodeApp = {};
   // Backbone Model, Collection, View
-  var Zipcode = Backbone.Model.extend({});
-  var Zipcodes = Backbone.Collection.extend({ model: Zipcode });
-  var ZipcodeView = Backbone.View.extend({
+  var Zipcode = window.ZipcodeApp.Zipcode = Backbone.Model.extend({});
+  var Zipcodes = window.ZipcodeApp.Zipcodes = Backbone.Collection.extend({ model: Zipcode });
+  var ZipcodeView = window.ZipcodeApp.ZipcodeView = Backbone.View.extend({
     initialize: function(options) {
       this.allZipcodes = options.allZipcodes;
-      this.query = 0;
+      this.query = options.query;
       this.render();
     },
 
@@ -18,7 +19,7 @@ $(function() {
 
       // matching zip code format (i.e., 5 digits)
       if (/^\d{5}$/.test(query)) {
-        this.query = parseInt(query);
+        this.query = query;
         this.render();
       }
     },
@@ -28,7 +29,7 @@ $(function() {
 
       if (this.query) {
         this.allZipcodes.forEach(function (areaInfo) {
-          if (areaInfo.get('zipcode') === this.query) {
+          if (areaInfo.get('zipcode') === parseInt(this.query)) {
             info = areaInfo;
           }
         }.bind(this));
@@ -43,6 +44,7 @@ $(function() {
 
 
 
+
   // initialze a new zip codes collection
   var AllZipcodes = new Zipcodes();
   // fetch zip codes collection and create the ZipcodeView only when it is fetched successfully
@@ -50,15 +52,15 @@ $(function() {
     url: "./db/zipcodes.json",
 
     success: function() {
-      var newView = new ZipcodeView({
+      var zipcodeView = new ZipcodeView({
         el: $('#area'),
         allZipcodes: AllZipcodes
       });
-      console.log("ZIP codes data are successfully fetched.");
+      console.info("      ZIP codes data are successfully fetched.");
     },
 
     error: function() {
-      console.log("Error: fetch fails.");
+      console.error("Error: fetch fails.");
     }
   });
 });
