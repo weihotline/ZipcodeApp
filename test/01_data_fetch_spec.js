@@ -5,7 +5,6 @@ describe('DOM', function() {
     before(function(done) {
       AllZipcodes = new window.ZipcodeApp.Zipcodes;
       AllZipcodes.fetch({
-        url: "./db/zipcodes.json",
         success: function() {
           done();
           $inputTag = $('#zipcode');
