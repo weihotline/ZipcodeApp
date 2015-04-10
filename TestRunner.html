@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>TestRunner</title>
-  <link rel="stylesheet" href="./node_modules/mocha/mocha.css">
+  <link rel="stylesheet" href="./spec/node_modules/mocha/mocha.css">
 </head>
 <body>
   <div id="container">
@@ -31,16 +31,16 @@
 
 
   <!-- JS files for testing -->
-  <script src="./node_modules/mocha/mocha.js"></script>
-  <script src="./node_modules/chai/chai.js"></script>
+  <script src="./spec/node_modules/mocha/mocha.js"></script>
+  <script src="./spec/node_modules/chai/chai.js"></script>
   <script>
     mocha.ui('bdd');
     mocha.reporter('html');
     var expect = chai.expect;
   </script>
 
-  <script src="./test/00_layout_spec.js"></script>
-  <script src="./test/01_data_fetch_spec.js"></script>
+  <script src="./spec/test/00_layout_spec.js"></script>
+  <script src="./spec/test/01_data_fetch_spec.js"></script>
   <script>
     if (window.mochaPhantomJS) {
       mochaPhantomJS.run();
