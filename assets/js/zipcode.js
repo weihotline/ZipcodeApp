@@ -2,7 +2,10 @@ $(function() {
   window.ZipcodeApp = {};
   // Backbone Model, Collection, View
   var Zipcode = window.ZipcodeApp.Zipcode = Backbone.Model.extend({});
-  var Zipcodes = window.ZipcodeApp.Zipcodes = Backbone.Collection.extend({ model: Zipcode });
+  var Zipcodes = window.ZipcodeApp.Zipcodes = Backbone.Collection.extend({
+    url: "./db/zipcodes.json",
+    model: Zipcode
+  });
   var ZipcodeView = window.ZipcodeApp.ZipcodeView = Backbone.View.extend({
     initialize: function(options) {
       this.allZipcodes = options.allZipcodes;
@@ -49,7 +52,6 @@ $(function() {
   var AllZipcodes = new Zipcodes();
   // fetch zip codes collection and create the ZipcodeView only when it is fetched successfully
   AllZipcodes.fetch({
-    url: "./db/zipcodes.json",
 
     success: function() {
       var zipcodeView = new ZipcodeView({
